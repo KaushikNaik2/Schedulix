@@ -72,7 +72,7 @@ This project is built with a modern, decoupled, full-stack architecture.
 
 ## ⚙️ Setup & Installation
 
-To run this project locally, you will need **two** separate terminals.
+To run this project locally, you will need **two** separate terminals or you can use the provided helper script to start both parts at once.
 
 **Prerequisites:**
 * JDK 17 (or newer)
@@ -80,16 +80,44 @@ To run this project locally, you will need **two** separate terminals.
 * Node.js 18 (or newer)
 * A running MySQL 8 server instance
 
-### **1. Backend (Runs on `localhost:8080`)**
+We now provide start-dev.sh to make starting the app easier. The script will build and run the backend and start the frontend dev server for you.
 
+### Option A — Recommended: start-dev.sh (single-command)
+1.  **Create Database (one-time):**
+    * Log into your MySQL server and create the database:
+      ```sql
+      CREATE DATABASE schedulix;
+      ```
+2.  **Configure Database Credentials:**
+    * Open `src/main/resources/application.properties` (backend) and update:
+      - `spring.datasource.username`
+      - `spring.datasource.password`
+      - (optionally) `spring.datasource.url` if your MySQL is not on localhost/default port
+3.  **Make the script executable (if needed) and run it:**
+    ```bash
+    chmod +x start-dev.sh
+    ./start-dev.sh
+    ```
+    What this does:
+    * Builds and runs the backend (Spring Boot) and starts the frontend dev server (Vite).
+    * Backend: http://localhost:8080
+    * Frontend: http://localhost:5173
+
+    Note: If your environment requires additional environment variables (e.g., custom ports or DB URL), set them before running the script or update the script accordingly.
+
+### Option B — Manual (two terminals)
+If you prefer to run backend and frontend manually, follow these steps.
+
+#### 1. Backend (Runs on `localhost:8080`)
 1.  **Navigate to the Backend Folder:**
     ```bash
-    cd schedulix-backend 
-    # Or your folder name (e.g., Schedulix_BE)
+    cd schedulix-backend
+    # Or your backend folder name (e.g., Schedulix_BE)
     ```
-2.  **Create Database:**
-    * Log into your MySQL server.
-    * Create the database: `CREATE DATABASE schedulix;`
+2.  **Create Database (if not done already):**
+    ```sql
+    CREATE DATABASE schedulix;
+    ```
 3.  **Configure Credentials:**
     * Open `src/main/resources/application.properties`.
     * Update `spring.datasource.username` and `spring.datasource.password` to match your MySQL user.
@@ -103,12 +131,11 @@ To run this project locally, you will need **two** separate terminals.
     ```
     The backend API will now be running at `http://localhost:8080`.
 
-### **2. Frontend (Runs on `localhost:5173`)**
-
+#### 2. Frontend (Runs on `localhost:5173`)
 1.  **Navigate to the Frontend Folder:**
     ```bash
     cd schedulix-frontend
-    # Or your folder name (e.g., Shivam)
+    # Or your frontend folder name (e.g., Schedulix_FE)
     ```
 2.  **Install Dependencies:**
     ```bash
@@ -126,7 +153,7 @@ To run this project locally, you will need **two** separate terminals.
 
 This project's development can be broken down into four distinct roles, perfect for a team of four.
 
-### **Role 1: Team Lead (Backend & Database)**
+### **Role 1: Shivam Pandey (Team Lead (Backend & Database))**
 * **Responsibilities:** Manages the overall project, Git repository, and the core database/security setup.
 * **Key Tasks:**
     * Designing the MySQL database schema (User, MeetingRequest, etc.).
@@ -134,7 +161,7 @@ This project's development can be broken down into four distinct roles, perfect 
     * Implementing the `User.java` model and `SecurityConfig.java` (JWT, CORS).
     * Managing the main Git branches and merging team contributions.
 
-### **Role 2: Backend Developer (API & Logic)**
+### **Role 2: Kaushik Naik (Backend Developer (API & Logic))**
 * **Responsibilities:** Builds the API endpoints and the business logic that powers all features.
 * **Key Tasks:**
     * Writing all controllers (`AuthController`, `MeetingRequestController`, etc.).
@@ -143,7 +170,7 @@ This project's development can be broken down into four distinct roles, perfect 
     * Handling the Excel file parsing with Apache POI.
     * Creating all DTOs (`RegisterRequest`, `MeetingRequestDTO`).
 
-### **Role 3: Frontend Developer (UI & Styling)**
+### **Role 3: Raksha Poojary (Frontend Developer (UI & Styling))**
 * **Responsibilities:** Implements the application's visual design, layout, and custom styling.
 * **Key Tasks:**
     * Translating the UI mockups into React components.
@@ -151,7 +178,7 @@ This project's development can be broken down into four distinct roles, perfect 
     * Implementing the "Dark Mode" feature and all `html.dark` CSS overrides.
     * Ensuring the application is responsive on mobile and desktop.
 
-### **Role 4: Frontend Developer (State & API Integration)**
+### **Role 4: Aditya Mishra (Frontend Developer (State & API Integration))**
 * **Responsibilities:** Manages the application's state and connects the UI to the backend API.
 * **Key Tasks:**
     * Building the `api.js` service to handle all `fetch` requests.
