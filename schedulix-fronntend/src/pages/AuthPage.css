@@ -1,0 +1,600 @@
+/* src/pages/AuthPage.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+/* --- Light Mode (Default) --- */
+.auth-page-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, #f8f8ff, #eef0ff);
+    font-family: 'Montserrat', sans-serif;
+    transition: background-color 0.3s ease;
+}
+.container {
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    max-width: 100%;
+    min-height: 600px;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+}
+.container * {
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+.container p {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.3px;
+    margin: 15px 0;
+    color: #333; /* Light mode text */
+    transition: color 0.3s ease;
+}
+.container a {
+    color: #333;
+    font-size: 13px;
+    text-decoration: none;
+    margin: 10px 0;
+    transition: color 0.3s ease;
+}
+.container a:hover {
+    text-decoration: underline;
+}
+
+.container button {
+    background: radial-gradient(circle at top left, #a881fb, #5b34ea);
+    color: #fff;
+    font-size: 12px;
+    padding: 10px 45px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+}
+.container button:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+.container button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: scale(1);
+}
+.container button.hidden {
+    background-color: transparent;
+    border-color: #ffffff;
+}
+
+.container form {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    /* Default to top-aligned for scrolling */
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 40px;
+    height: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.container input {
+    background-color: #eee;
+    border: none;
+    margin: 6px 0;
+    padding: 10px 15px;
+    font-size: 13px;
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-align: center; /* <-- FIX 1: Centers text inside inputs */
+}
+
+.form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+    overflow-y: auto;
+}
+
+/* --- Custom Scrollbar --- */
+.form-container::-webkit-scrollbar {
+    width: 6px;
+}
+.form-container::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    border-radius: 6px;
+}
+.form-container::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+.sign-in {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+    overflow-y: hidden;
+}
+
+/* --- FIX 2: Vertically center BOTH forms --- */
+.sign-in form,
+.sign-up form {
+    justify-content: center;
+}
+/* --- END FIX 2 --- */
+
+
+.container.active .sign-in {
+    transform: translateX(100%);
+}
+
+.sign-up {
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+
+.container.active .sign-up {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: move 0.6s;
+}
+
+@keyframes move {
+    0%, 49.99% {
+        opacity: 0;
+        z-index: 1;
+    }
+    50%, 100% {
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+.social-icons {
+    margin: 15px 0;
+}
+.social-icons a {
+    border: 1px solid #ccc;
+    border-radius: 20%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 3px;
+    width: 40px;
+    height: 40px;
+}
+
+.toggle-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: all 0.6s ease-in-out;
+    border-radius: 150px 0 0 100px;
+    z-index: 1000;
+}
+
+.container.active .toggle-container {
+    transform: translateX(-100%);
+    border-radius: 0 150px 100px 0;
+}
+
+.toggle {
+    background: linear-gradient(to bottom right, #a779fc, #5e36ff);
+    height: 100%;
+    color: #fff;
+    position: relative;
+    left: -100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+}
+
+/* --- Role/Question Selection Styles --- */
+.role-dropdown-container {
+    width: 100%;
+    position: relative;
+    margin: 6px 0;
+}
+
+.role-display-button {
+    background: linear-gradient(to right, #9154f2, #7d26f7);
+    color: #ffffff !important;
+    border: none !important;
+    width: 100%;
+    padding: 10px 15px !important;
+    font-size: 13px !important;
+    border-radius: 8px !important;
+    font-weight: 400 !important;
+    text-transform: none !important;
+    /* --- THIS IS THE FIX --- */
+    text-align: left; /* 1. Align text left for readability */
+    white-space: normal; /* 2. Allow text to wrap */
+    height: auto;         /* 3. Allow height to grow */
+    min-height: 40px;     /* 4. Keep the original minimum height */
+    line-height: 1.4;     /* 5. Set a natural line height for wrapping */
+    /* ---------------------- */
+    cursor: pointer;
+    box-shadow: none;
+    transition: background-color 0.2s;
+    display: block !important;
+    /* overflow, text-overflow, and nowrap removed */
+}
+
+.role-display-button.selected {
+    font-weight: 600 !important;
+    color: #ffffff !important;
+}
+
+.role-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    padding: 5px 0;
+    display: flex;
+    flex-direction: column;
+    max-height: 135px;
+    overflow-y: auto;
+}
+
+.role-options button {
+    background-color: transparent !important;
+    color: #f1f1f1 !important;
+    border: none !important;
+    width: 100%;
+    padding: 10px 15px !important;
+    font-size: 13px !important;
+    text-transform: none !important;
+    text-align: left; /* Keep dropdown items left-aligned */
+    transition: background-color 0.2s;
+    margin-top: 0 !important;
+    white-space: normal;
+    height: auto;
+    line-height: 1.4;
+}
+
+.role-options button:hover {
+    background-color: #f4f4f4 !important;
+    color: #333 !important; /* Make text dark on hover */
+}
+/* --- End Role/Question Styles --- */
+
+.container.active .toggle {
+    transform: translateX(50%);
+}
+
+.toggle-panel {
+    background: linear-gradient(to bottom right, #8d5beb, #3e13ec);
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 30px;
+    text-align: center;
+    top: 0;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+}
+
+.toggle-panel h1 {
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.form-container h1 {
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.toggle-left {
+    transform: translateX(-200%);
+}
+
+.container.active .toggle-left {
+    transform: translateX(0);
+}
+
+.toggle-right {
+    right: 0;
+    transform: translateX(0);
+}
+
+.container.active .toggle-right {
+    transform: translateX(200%);
+}
+
+
+/* --- NEW STYLES FOR FORGOT PASSWORD ---
+*/
+
+/* --- Password Show/Hide Icon --- */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 6px 0;
+}
+.password-wrapper input {
+    /* Input takes full width */
+    width: 100%;
+    margin: 0;
+    padding-right: 40px; /* Make space for the icon */
+}
+.password-wrapper button {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent !important;
+    border: none !important;
+    padding: 10px !important;
+    margin: 0 !important;
+    color: #555 !important;
+    cursor: pointer;
+    box-shadow: none;
+}
+.password-wrapper button:hover {
+    color: #000 !important;
+    transform: translateY(-50%);
+}
+/* --- End Password Icon --- */
+
+
+/* --- Modal Backdrop --- */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    backdrop-filter: blur(5px);
+}
+
+/* --- Modal Content Box --- */
+.modal-content {
+    background-color: #ffffff;
+    padding: 2.5rem; /* 40px */
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-content h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.modal-content p {
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.modal-content form {
+    padding: 0;
+    height: auto;
+    justify-content: flex-start;
+}
+
+.modal-content input {
+    width: 100%;
+    margin-top: 10px;
+    text-align: left; /* Keep modal text left-aligned */
+}
+
+.modal-content button[type="submit"] {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.modal-content .password-hint {
+    font-size: 12px;
+    color: #777;
+    margin-top: 10px;
+    text-align: left;
+}
+
+.modal-content strong {
+    display: block;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    margin: 15px 0;
+}
+
+.modal-close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent !important;
+    border: none !important;
+    font-size: 30px !important;
+    font-weight: 300;
+    color: #aaa !important;
+    cursor: pointer;
+    padding: 0 !important;
+    margin: 0 !important;
+    line-height: 1;
+    box-shadow: none;
+}
+.modal-close-button:hover {
+    color: #000 !important;
+}
+
+/* --- End Modal Styles --- */
+
+
+/* =========================================
+--- DARK MODE OVERRIDES ---
+=========================================
+*/
+
+html.dark .auth-page-wrapper {
+    background: linear-gradient(to bottom right, #1a202c, #2d3748); /* Dark gradient */
+}
+
+html.dark .container {
+    background-color: #2d3748; /* Dark card */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+html.dark .container p {
+    color: #e2e8f0; /* Light text */
+}
+
+html.dark .container a {
+    color: #a0aec0; /* Lighter text for links */
+}
+
+html.dark .container a:hover {
+    color: #fff;
+}
+
+html.dark .container input {
+    background-color: #4a5568; /* Darker input */
+    color: #e2e8f0; /* Light text in input */
+    border: 1px solid #4a5568;
+}
+html.dark .container input::placeholder {
+    color: #a0aec0;
+}
+
+/* --- Dark Mode for Scrollbar --- */
+html.dark .form-container::-webkit-scrollbar-thumb {
+    background-color: #4a5568;
+}
+html.dark .form-container::-webkit-scrollbar-track {
+    background-color: #2d3748;
+}
+/* --- End Scrollbar --- */
+
+
+html.dark .form-container form {
+    background-color: #2d3748; /* Dark form bg */
+}
+
+html.dark .form-container h1 {
+    color: #fff; /* White heading */
+}
+
+/* --- Dark Mode for Dropdowns --- */
+html.dark .role-display-button {
+    color: #ffffff !important;
+}
+html.dark .role-display-button.selected {
+    color: #ffffff !important;
+}
+
+html.dark .role-options {
+    background-color: #1a202c; /* Dark dropdown bg */
+    border: 1px solid #4a5568;
+}
+
+html.dark .role-options button {
+    color: #e2e8f0 !important; /* Light text */
+}
+
+html.dark .role-options button:hover {
+    background-color: #2d3748 !important; /* Dark hover */
+    color: #fff !important; /* Make text white on hover */
+}
+
+/* --- Dark Mode for Password Icon --- */
+html.dark .password-wrapper button {
+    color: #a0aec0 !important;
+}
+html.dark .password-wrapper button:hover {
+    color: #fff !important; /* <-- THIS WAS THE TYPO: !imporant */
+}
+
+/* --- Dark Mode for Forgot Password Modal --- */
+html.dark .modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+}
+html.dark .modal-content {
+    background-color: #2d3748;
+    color: #e2e8f0;
+}
+html.dark .modal-content h2 {
+    color: #fff;
+}
+html.dark .modal-content p {
+    color: #e2e8f0;
+}
+html.dark .modal-content input {
+    background-color: #4a5568;
+    color: #e2e8f0;
+    text-align: left; /* Keep modal text left-aligned */
+}
+html.dark .modal-content strong {
+    background-color: #4a5568;
+    color: #fff;
+}
+html.dark .modal-content .password-hint {
+    color: #a0aec0;
+}
+html.dark .modal-close-button {
+    color: #a0aec0 !important;
+}
+html.dark .modal-close-button:hover {
+    color: #fff !important;
+}
+
