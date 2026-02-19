@@ -11,9 +11,6 @@ Schedulix is a full-stack web application designed to streamline and modernize t
 
 This platform replaces outdated methods like email chains and physical office-hour sheets with a centralized, real-time, and user-friendly system. Students can instantly view faculty timetables and availability, while faculty can manage their schedules and broadcast information with ease.
 
-### [View Live Demo (Placeholder)](https://your-demo-url.com)
-
-*(Suggestion: Add a screenshot of your application's dashboard here)*
 
 ---
 
